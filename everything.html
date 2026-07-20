@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Essence of Green | Everything Green</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #2e5c31; --bg-gradient: linear-gradient(135deg, #e2f0e5 0%, #f4fbf4 100%); --card-bg: rgba(255, 255, 255, 0.85); }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg-gradient); color: var(--primary); margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+        header { text-align: center; margin-top: 60px; animation: fadeIn 1.2s ease-out; }
+        header h1 { font-family: 'Lora', serif; font-size: 3.5em; font-weight: 500; color: #1e3f20; margin: 0; letter-spacing: 2px; }
+        nav { background: rgba(168, 213, 186, 0.4); backdrop-filter: blur(10px); padding: 15px 40px; border-radius: 50px; margin: 30px 0; display: flex; gap: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); animation: fadeIn 1.5s ease-out; }
+        nav a { color: #2e5c31; text-decoration: none; font-weight: 600; font-size: 1.05em; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; position: relative; }
+        nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: #2e5c31; transition: width 0.3s ease; }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        .container { max-width: 700px; padding: 50px; background: var(--card-bg); backdrop-filter: blur(20px); border-radius: 20px; box-shadow: 0 20px 40px rgba(46, 92, 49, 0.08); border: 1px solid rgba(255,255,255,0.8); animation: slideUp 1s ease-out forwards; opacity: 0; transform: translateY(20px); }
+        h2 { font-family: 'Lora', serif; color: #3b7a40; font-size: 2.2em; margin-top: 0; font-weight: 400; border-bottom: 1px solid #d0e5d5; padding-bottom: 15px; }
+        p, li { line-height: 1.9; font-size: 1.1em; color: #4a6d4d; font-weight: 300; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
+        strong { font-weight: 600; color: #2e5c31; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Essence of Green</h1>
+    </header>
+    <nav>
+        <a href="index.html">Nature</a>
+        <a href="calmness.html">Calmness</a>
+        <a href="everything.html" class="active">Everything Else</a>
+    </nav>
+    <div class="container">
+        <h2>The Spectrum of Green</h2>
+        <p>Beyond nature and tranquility, green holds profound cultural and psychological significance across the globe. It is a complex color that touches almost every aspect of human life.</p>
+        <ul>
+            <li><strong>Health & Vitality:</strong> Often associated with nutrition, wellness, and healing.</li>
+            <li><strong>Prosperity & Luck:</strong> In many cultures, green is the color of wealth, good fortune, and progress.</li>
+            <li><strong>Sustainability:</strong> Today, "going green" is the universal call to action for environmental awareness.</li>
+        </ul>
+        <p>From the subtle aesthetic of a matcha latte to the brilliant flash of an emerald, green remains the color of enduring life and gentle energy.</p>
+    </div>
+</body>
+</html>

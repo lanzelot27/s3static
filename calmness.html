@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Essence of Green | Calmness</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #2e5c31; --bg-gradient: linear-gradient(135deg, #e2f0e5 0%, #f4fbf4 100%); --card-bg: rgba(255, 255, 255, 0.85); }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg-gradient); color: var(--primary); margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+        header { text-align: center; margin-top: 60px; animation: fadeIn 1.2s ease-out; }
+        header h1 { font-family: 'Lora', serif; font-size: 3.5em; font-weight: 500; color: #1e3f20; margin: 0; letter-spacing: 2px; }
+        nav { background: rgba(168, 213, 186, 0.4); backdrop-filter: blur(10px); padding: 15px 40px; border-radius: 50px; margin: 30px 0; display: flex; gap: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.5); animation: fadeIn 1.5s ease-out; }
+        nav a { color: #2e5c31; text-decoration: none; font-weight: 600; font-size: 1.05em; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; position: relative; }
+        nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: #2e5c31; transition: width 0.3s ease; }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        .container { max-width: 700px; padding: 50px; background: var(--card-bg); backdrop-filter: blur(20px); border-radius: 20px; box-shadow: 0 20px 40px rgba(46, 92, 49, 0.08); border: 1px solid rgba(255,255,255,0.8); animation: slideUp 1s ease-out forwards; opacity: 0; transform: translateY(20px); }
+        h2 { font-family: 'Lora', serif; color: #3b7a40; font-size: 2.2em; margin-top: 0; font-weight: 400; border-bottom: 1px solid #d0e5d5; padding-bottom: 15px; }
+        p { line-height: 1.9; font-size: 1.1em; color: #4a6d4d; font-weight: 300; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Essence of Green</h1>
+    </header>
+    <nav>
+        <a href="index.html">Nature</a>
+        <a href="calmness.html" class="active">Calmness</a>
+        <a href="everything.html">Everything Else</a>
+    </nav>
+    <div class="container">
+        <h2>A Canvas of Calmness</h2>
+        <p>Human eyes are highly adapted to discern the nuances of green, making it the most restful color for us to view. Because it sits at the center of the visible color spectrum, green requires no adjustment from the eye, providing an immediate sense of rest and relaxation.</p>
+        <p>Psychologically, soft and muted greens—like sage, mint, and pale olive—lower our heart rates and reduce anxiety. It is the color of sanctuary. Whether it is a quiet garden or a softly painted room, green creates a peaceful environment that promotes balance, harmony, and emotional stability.</p>
+    </div>
+</body>
+</html>
