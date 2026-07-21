@@ -1,32 +1,50 @@
+// Jenkinsfile
 pipeline {
     agent any
 
     environment {
-        // Set this to your exact Azure Storage Account Name
-        AZ_ACCOUNT = 'lanzstg'
-        AZ_SHARE   = 'webcontent'
+        AZ_CREDS = credentials('azure-storage-key')
+        AWS_SSH_KEY = credentials('aws-ec2-ssh-key')
+        EC2_IP_1 = '10.0.142.82'
+        EC2_IP_2 = '10.0.152.186'
+        ACI_ENDPOINT = 'lanzy-nginx-app.centralindia.azurecontainer.io'
+        STORAGE_ACCOUNT = 'lanzstrue'
+        SHARE_NAME = 'webcontent'
     }
 
     stages {
-        stage('Checkout Source') {
+        stage('Deploy to Staging (Azure ACI)') {
             steps {
-                checkout scm
+                sh '''
+                    az storage file upload \
+                        --account-name $STORAGE_ACCOUNT \
+                        --account-key $AZ_CREDS \
+                        --share-name $SHARE_NAME \
+                        --source index.html
+                '''
             }
         }
 
-        stage('Deploy Content to ACI File Share') {
+        stage('Test Staging') {
             steps {
-                withCredentials([string(credentialsId: 'azure-storage-key', variable: 'AZ_KEY')]) {
-                    sh '''
-                        az storage file upload-batch \
-                          --account-name "$AZ_ACCOUNT" \
-                          --account-key "$AZ_KEY" \
-                          --destination "$AZ_SHARE" \
-                          --source . \
-                          --pattern "*.html" \
-                          --no-progress
-                    '''
-                }
+                sh '''
+                    sleep 10
+                    HTTP_CODE=$(curl -s -o /tmp/resp.txt -w "%{http_code}" http://$ACI_ENDPOINT)
+                    if [ "$HTTP_CODE" -ne 200 ]; then
+                        echo "Staging check failed with HTTP $HTTP_CODE"
+                        exit 1
+                    fi
+                    grep -q "Hello" /tmp/resp.txt || { echo "Content assertion failed"; exit 1; }
+                '''
+            }
+        }
+
+        stage('Deploy to Production (AWS EC2)') {
+            steps {
+                sh '''
+                    ssh -o StrictHostKeyChecking=no -i $AWS_SSH_KEY ec2-user@$EC2_IP_1 'sudo cp /tmp/index.html /usr/share/nginx/html/'
+                    ssh -o StrictHostKeyChecking=no -i $AWS_SSH_KEY ec2-user@$EC2_IP_2 'sudo cp /tmp/index.html /usr/share/nginx/html/'
+                '''
             }
         }
     }
