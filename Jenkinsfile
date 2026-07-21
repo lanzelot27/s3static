@@ -1,10 +1,8 @@
-// Jenkinsfile
 pipeline {
     agent any
 
     environment {
         AZ_CREDS = credentials('azure-storage-key')
-        AWS_SSH_KEY = credentials('aws-ec2-ssh-key')
         EC2_IP_1 = '10.0.142.82'
         EC2_IP_2 = '10.0.152.186'
         ACI_ENDPOINT = 'lanzy-nginx-app.centralindia.azurecontainer.io'
@@ -40,16 +38,17 @@ pipeline {
         }
 
         stage('Deploy to Production (AWS EC2)') {
-    steps {
-        sshagent(['aws-ec2-ssh-key']) {
-            sh '''
-                scp -o StrictHostKeyChecking=no index.html ec2-user@$EC2_IP_1:/tmp/index.html
-                ssh -o StrictHostKeyChecking=no ec2-user@$EC2_IP_1 'sudo cp /tmp/index.html /usr/share/nginx/html/'
+            steps {
+                sshagent(['aws-ec2-ssh-key']) {
+                    sh '''
+                        scp -o StrictHostKeyChecking=no index.html ec2-user@$EC2_IP_1:/tmp/index.html
+                        ssh -o StrictHostKeyChecking=no ec2-user@$EC2_IP_1 'sudo cp /tmp/index.html /usr/share/nginx/html/'
 
-                scp -o StrictHostKeyChecking=no index.html ec2-user@$EC2_IP_2:/tmp/index.html
-                ssh -o StrictHostKeyChecking=no ec2-user@$EC2_IP_2 'sudo cp /tmp/index.html /usr/share/nginx/html/'
-            '''
+                        scp -o StrictHostKeyChecking=no index.html ec2-user@$EC2_IP_2:/tmp/index.html
+                        ssh -o StrictHostKeyChecking=no ec2-user@$EC2_IP_2 'sudo cp /tmp/index.html /usr/share/nginx/html/'
+                    '''
+                }
+            }
         }
     }
-}
 }
